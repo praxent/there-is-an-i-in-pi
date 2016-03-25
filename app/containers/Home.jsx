@@ -27,8 +27,8 @@ class Home extends React.Component {
 
     componentDidMount() {
         users.getAll()
-        .then((data) => {
-            this.setState({users: data})
+        .then((result) => {
+            this.setState({users: result.data})
         })
         .catch((err) => { console.log(err); });
     }
@@ -50,7 +50,7 @@ class Home extends React.Component {
                     </TableHeader>
                     <TableBody showRowHover={true}>
                         {this.state.users.map(user =>
-                            <TableRow key={user.name}>
+                            <TableRow key={user.id}>
                                 <TableRowColumn>{`${user.name_first} ${user.name_last}`}</TableRowColumn>
                                 <TableRowColumn>{user.bluetooth_address}</TableRowColumn>
                                 <TableRowColumn>{user.last_seen}</TableRowColumn>

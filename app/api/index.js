@@ -16,7 +16,7 @@ function checkHttpStatus(response, isLogin) {
 
 const publicFetch = (path, method, data) => {
     return axios({
-        url: `${base}/public${path}`,
+        url: `${base}/${path}`,
         method: method,
         headers: {
             'Content-Type': 'application/json',
