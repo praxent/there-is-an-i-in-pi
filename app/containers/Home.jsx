@@ -5,6 +5,7 @@ import { Table,
         TableHeaderColumn, TableRow,
         TableHeader, TableRowColumn, TableBody, RaisedButton
 } from 'material-ui';
+import { Header } from '../components/Header.jsx';
 import { users } from '../api'
 
 class Home extends React.Component {
@@ -14,15 +15,6 @@ class Home extends React.Component {
         this.state = {
             users: []
         };
-
-
-            // {
-            //     name: 'test',
-            //     device: 'test device',
-            //     audio:'',
-            //     lastSeen: new Date().toString(),
-            //     status: 'In Office'
-            // }
     }
 
     componentDidMount() {
@@ -36,6 +28,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
+                <Header />
                 <h1>Users</h1>
                     <RaisedButton label="Add" linkButton={true} primary={true} href={`#/users/add`}  />
                 <Table>
