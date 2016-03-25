@@ -1,7 +1,7 @@
 import axios from 'axios';
 import login from './login';
 
-const base = 'http://localhost:3001'
+const base = 'http://pi.dev';
 
 function checkHttpStatus(response, isLogin) {
     console.log(`checkHttpStatus ${response.status}`);
