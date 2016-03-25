@@ -21,9 +21,9 @@ class AddUser extends React.Component {
                   <br />
                   <TextField placeholder="Last Name"></TextField>
                   <br />
-                  <SvgIcon>Upload</RaisedButton>
+                  <SvgIcon>Upload</SvgIcon>
                   <br />
-                  <span>If your last name is Coker, then please do not supply a first name because it will not be considered.</span>
+                  <span>If your last name is "Coker", then please do not supply a first name different than "Coker" because it will not be considered.</span>
                 </form>
             </div>
         );
