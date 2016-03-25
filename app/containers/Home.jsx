@@ -5,6 +5,7 @@ import { Table,
         TableHeaderColumn, TableRow,
         TableHeader, TableRowColumn, TableBody, RaisedButton
 } from 'material-ui';
+import { Header } from '../components/Header.jsx';
 import { users } from '../api'
 
 class Home extends React.Component {
@@ -14,21 +15,12 @@ class Home extends React.Component {
         this.state = {
             users: []
         };
-
-
-            // {
-            //     name: 'test',
-            //     device: 'test device',
-            //     audio:'',
-            //     lastSeen: new Date().toString(),
-            //     status: 'In Office'
-            // }
     }
 
     componentDidMount() {
         users.getAll()
-        .then((data) => {
-            this.setState({users: data})
+        .then((result) => {
+            this.setState({users: result.data})
         })
         .catch((err) => { console.log(err); });
     }
@@ -36,6 +28,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
+                <Header />
                 <h1>Users</h1>
                     <RaisedButton label="Add" linkButton={true} primary={true} href={`#/users/add`}  />
                 <Table>
@@ -50,7 +43,7 @@ class Home extends React.Component {
                     </TableHeader>
                     <TableBody showRowHover={true}>
                         {this.state.users.map(user =>
-                            <TableRow key={user.name}>
+                            <TableRow key={user.id}>
                                 <TableRowColumn>{`${user.name_first} ${user.name_last}`}</TableRowColumn>
                                 <TableRowColumn>{user.bluetooth_address}</TableRowColumn>
                                 <TableRowColumn>{user.last_seen}</TableRowColumn>

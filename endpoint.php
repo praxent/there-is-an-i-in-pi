@@ -23,7 +23,7 @@ class API {
   public function run()
   {
     if (in_array($this->method, array('get', 'put'))) {
-      $result = array('message' => 'success', 'data' => $this->{$this->method}());
+      $result = array('data' => $this->{$this->method}());
     } else {
       $result = array('message' => 'Invalid method');
     }
@@ -62,13 +62,10 @@ SQL;
   private function put() {
     $args = $this->decodeJSON();
 
-    $result = $this->repo->setSql(<<<SQL
+    return $this->repo->setSql(<<<SQL
       INSERT INTO user (name_last, name_first, bluetooth_address, status, audio_file, last_seen) VALUES ('{$args["name_last"]}', '{$args["name_first"]}', '{$args["bluetooth_address"]}', '{$args["status"]}', '{$args["audio_file"]}', NOW())
 SQL
     );
-
-    echo json_encode(array('success' => $result ? true: false));
-    exit;
   }
 
   private function update() {
@@ -81,15 +78,12 @@ SQL
 
     $conditions = implode(' AND ', $conditions);
 
-    $result = $this->repo->setSql(<<<SQL
+    return $this->repo->setSql(<<<SQL
       UPDATE user
          SET {$conditions}
       WHERE bluetooth_address = '{$args['bluetooth_address']}'
 SQL
     );
-
-    echo json_encode('success' => $result ? true : false);
-    exit;
   }
 
   private function decodeJSON()

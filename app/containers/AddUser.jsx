@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { RaisedButton, TextField } from 'material-ui';
 import { stateToProps, dispatchToProps } from '../utils';
-
+import { Header } from '../components/Header.jsx';
 
 class AddUser extends React.Component {
 
@@ -50,6 +50,7 @@ class AddUser extends React.Component {
     render() {
         return (
             <div>
+                <Header />
                 <h1>Add a User</h1>
                 <form onSubmit="">
                   <TextField 
