@@ -1,0 +1,5 @@
+Options +FollowSymlinks
+RewriteBase /
+RewriteEngine ON
+RewriteRule ^api/(.*)/(.*)/?$ endpoint.php?method=$1&param=$2 [L]
+RewriteRule ^api/(.*)/?$ endpoint.php?method=$1 [L]
