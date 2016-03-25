@@ -42,14 +42,13 @@ class API {
 SQL;
 
     if ($this->param) {
-      $params = array_map(function($param) {
-        return explode('=', $param);
-      }, explode('&', $this->param));
+      $args = $this->decodeJSON();
 
-      if (!empty($params)) {
-        $conditions = array_map(function($param) {
-          return "{$param[0]} = '{$param[1]}'";
-        }, $params);
+      if (!empty($args)) {
+        $conditions = array();
+        foreach ($args as $key => $value) {
+          $conditions[] = "{$key} = '{$value}'";
+        }
 
         $conditions = implode(' AND ', $conditions);
 
