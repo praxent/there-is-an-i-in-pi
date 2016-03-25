@@ -9,6 +9,7 @@ import reducers  from './reducers';
 
 import {
     Home,
+    AddUser,
     Settings
 } from './containers';
 
@@ -20,7 +21,8 @@ render((
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Home} />
-                <Route path="home" component={Home} />
+                <Route path="users" component={Home} />
+                <Route path="users/add" component={AddUser} />
                 <Route path="settings" component={Settings} />
         </Router>
     </Provider>
