@@ -21,7 +21,7 @@ class Home extends React.Component {
                 }
             ]
         };
-        console.log('Home ddid mount');
+        console.log('Home did mount');
     }
 
     render() {
