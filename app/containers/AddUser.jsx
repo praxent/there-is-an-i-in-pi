@@ -62,7 +62,8 @@ class AddUser extends React.Component {
     }
 
     updateValue(e) {
-        this.setState({ [e.target.name]: e.target.value });
+        let newValue = (e.target.value) ? e.target.value : '';
+        this.setState({ [e.target.name]: newValue });
     }
 
     render() {
@@ -82,7 +83,7 @@ class AddUser extends React.Component {
                     name="name_last"
                     value={this.state.name_last}
                     onBlur={e => this.onBlur(e)} 
-                    onChange={e => this.checkFirstName(e)} 
+                    onChange={e => this.updateValue(e)} 
                   />
                   <br />
                   <TextField placeholder="Bluetooth Device ID"
