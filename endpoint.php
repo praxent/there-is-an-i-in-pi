@@ -71,6 +71,27 @@ SQL
     exit;
   }
 
+  private function update() {
+    $args = $this->decodeJSON();
+
+    $conditions = array();
+    foreach ($args as $key => $value) {
+      $conditions[] = "{$key} = '{$value}'";
+    }
+
+    $conditions = implode(' AND ', $conditions);
+
+    $result = $this->repo->setSql(<<<SQL
+      UPDATE user
+         SET {$conditions}
+      WHERE bluetooth_address = '{$args['bluetooth_address']}'
+SQL
+    );
+
+    echo json_encode('success' => $result ? true : false);
+    exit;
+  }
+
   private function decodeJSON()
   {
     $params = json_decode(html_entity_decode($this->param),true);
