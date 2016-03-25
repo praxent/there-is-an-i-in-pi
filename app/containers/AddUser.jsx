@@ -51,6 +51,7 @@ class AddUser extends React.Component {
 
     submit(e) {
         e.preventDefault();
+        console.log(this.state);
         users.update(this.state)
             .then((result) => {
                 this.props.history.push('/users');

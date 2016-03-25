@@ -76,7 +76,7 @@ SQL
       $conditions[] = "{$key} = '{$value}'";
     }
 
-    $conditions = implode(' AND ', $conditions);
+    $conditions = implode(', ', $conditions);
 
     return $this->repo->setSql(<<<SQL
       UPDATE user
