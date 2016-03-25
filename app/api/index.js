@@ -1,5 +1,6 @@
 import axios from 'axios';
 import login from './login';
+import users from './users';
 
 const base = 'http://pi.dev';
 
@@ -35,5 +36,6 @@ const protectedFetch = (path, options) => {
 export {
     publicFetch,
     protectedFetch,
-    login
+    login,
+    users
 }
