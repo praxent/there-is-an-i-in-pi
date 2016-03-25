@@ -10,6 +10,7 @@ class AddUser extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+          id: null,  
           name_first: '',
           name_last: '',
           bluetooth_address: ''
@@ -18,11 +19,9 @@ class AddUser extends React.Component {
 
     componentDidMount() {
         const { id } = this.props.params;
-        console.log(id);
         if (!id) return;
         users.getSingle(id)
         .then((result) => {
-            console.log(result.data[0]);
             this.setState(Object.assign({}, this.state, result.data[0]))
         })
         .catch((err) => { console.log(err); });
@@ -50,15 +49,27 @@ class AddUser extends React.Component {
     }
 
     submit(e) {
+        const { id } = this.props.params;
         e.preventDefault();
         console.log(this.state);
-        users.update(this.state)
-            .then((result) => {
-                this.props.history.push('/users');
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        if (id) {
+            users.update(this.state)
+                .then((result) => {
+                    this.props.history.push('/users');
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+        else {
+            users.post(this.state)
+                .then((result) => {
+                    this.props.history.push('/users');
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     }
 
     updateValue(e) {
