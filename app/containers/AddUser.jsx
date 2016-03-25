@@ -6,6 +6,12 @@ import { stateToProps, dispatchToProps } from '../utils';
 
 class AddUser extends React.Component {
 
+    componentDidMount() {
+        const { id } = this.props.params;
+        if(!id) return;
+        console.log(id);
+    }
+
     render() {
         return (
             <div>

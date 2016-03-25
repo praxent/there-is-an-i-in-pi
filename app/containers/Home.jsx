@@ -21,7 +21,6 @@ class Home extends React.Component {
                 }
             ]
         };
-        console.log('Home ddid mount');
     }
 
     render() {
@@ -48,7 +47,7 @@ class Home extends React.Component {
                                 <TableRowColumn>{user.status}</TableRowColumn>
 
                                 <TableRowColumn style={{ textAlign: 'center' }}>
-                                    <RaisedButton linkButton={true} primary={true} label="Edit" href={`/user/edit/${user.id}`} />
+                                    <RaisedButton linkButton={true} primary={true} label="Edit" href={`#/users/add/${user.name}`} />
                                 </TableRowColumn>
                             </TableRow>
                         )}
