@@ -6,7 +6,7 @@ import { Table,
         TableHeader, TableRowColumn, TableBody, RaisedButton
 } from 'material-ui';
 import { Header } from '../components/Header.jsx';
-import { users } from '../api'
+import { users } from '../api';
 
 class Home extends React.Component {
     constructor(props) {

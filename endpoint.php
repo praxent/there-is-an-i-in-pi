@@ -22,7 +22,7 @@ class API {
 
   public function run()
   {
-    if (in_array($this->method, array('get', 'put'))) {
+    if (in_array($this->method, array('get', 'put', 'update'))) {
       $result = array('data' => $this->{$this->method}());
     } else {
       $result = array('message' => 'Invalid method');
@@ -91,8 +91,8 @@ SQL
     $params = json_decode(html_entity_decode($this->param),true);
 
     $args = array();
-    foreach ($params as $param) {
-      $args[key($param)] = $param[key($param)];
+    foreach ($params as $key => $value) {
+      $args[$key] = $value;
     }
 
     return $args;

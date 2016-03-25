@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { RaisedButton, TextField } from 'material-ui';
 import { stateToProps, dispatchToProps } from '../utils';
 import { Header } from '../components/Header.jsx';
+import { users } from '../api';
 
 class AddUser extends React.Component {
 
@@ -10,14 +11,22 @@ class AddUser extends React.Component {
         super(props);
         this.state = {
           name_first: '',
-          name_last: ''
+          name_last: '',
+          bluetooth_address: ''
         }; 
     }
 
     componentDidMount() {
         const { id } = this.props.params;
-        if(!id) return;
         console.log(id);
+        if (!id) return;
+        users.getSingle(id)
+        .then((result) => {
+            console.log(result.data[0]);
+            this.setState(Object.assign({}, this.state, result.data[0]))
+        })
+        .catch((err) => { console.log(err); });
+  
     }
 
     onBlur(e) {
@@ -36,15 +45,23 @@ class AddUser extends React.Component {
             });
         }
         else {
-            this.updateName(e);
+            this.updateValue(e);
         }
     }
 
-    updateName(e) {
-        let name = (e.target.value) ? e.target.value : '';
-        this.setState({
-            [e.target.name]: name
-        });
+    submit(e) {
+        e.preventDefault();
+        users.update(this.state)
+            .then((result) => {
+                this.props.history.push('/users');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    updateValue(e) {
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     render() {
@@ -52,7 +69,7 @@ class AddUser extends React.Component {
             <div>
                 <Header />
                 <h1>Add a User</h1>
-                <form onSubmit="">
+                <form onSubmit={e => this.submit(e)}>
                   <TextField 
                     placeholder="First Name" 
                     name="name_first"
@@ -62,11 +79,18 @@ class AddUser extends React.Component {
                   <br />
                   <TextField placeholder="Last Name"
                     name="name_last"
+                    value={this.state.name_last}
                     onBlur={e => this.onBlur(e)} 
-                    onChange={e => this.updateName(e)} 
+                    onChange={e => this.checkFirstName(e)} 
+                  />
+                  <br />
+                  <TextField placeholder="Bluetooth Device ID"
+                    name="bluetooth_address"
+                    value={this.state.bluetooth_address}
+                    onChange={e => this.updateValue(e)} 
                     />
                   <br />
-                  <RaisedButton>Upload</RaisedButton>
+                  <RaisedButton type="Submit">Submit</RaisedButton>
                   <br />
                   <span>If your last name is "Coker", then please do not supply a first name different than "Coker" because it will not be considered.</span>
                 </form>
